@@ -28,15 +28,15 @@ class SlicedSurfacePropertyGroup(bpy.types.PropertyGroup):
                                 update=updateSlicedSurface)
     nSlices = IntProperty(      name='Number of Slices',
                                 description='Number of Slices',
-                                default=16, min=2, soft_max=100,
+                                default=18, min=2, soft_max=100,
                                 update=updateSlicedSurface)
     nRes = IntProperty(         name='Resolution',
                                 description='Resolution',
-                                default=50, min=2, soft_max=100,
+                                default=100, min=2, soft_max=1000,
                                 update=updateSlicedSurface)
     amplitude = FloatProperty(  name='Amplitude',
                                 description='Amplitude of the surface in Z direction',
-                                default=64.0, min=0.0, soft_max=1000.0,
+                                default=100.0, min=0.0, soft_max=1000.0,
                                 update=updateSlicedSurface)
     numWaves = IntProperty(     name='Number of Waves',
                                 description='Number of Waves',
@@ -44,23 +44,23 @@ class SlicedSurfacePropertyGroup(bpy.types.PropertyGroup):
                                 update=updateSlicedSurface)
     maxFreq = IntProperty(      name='Maximum Frequency',
                                 description='Maximum frequency of surface',
-                                default=1, min=0, soft_max=3,
+                                default=3, min=0, soft_max=3,
                                 update=updateSlicedSurface)
     sliceDepth = FloatProperty( name='Slice Width',
                                 description='Width of each slice',
-                                default=1, min=0.1, max=10.0,
+                                default=4.0, min=0.1, max=10.0,
                                 update=updateSlicedSurface)
     width = FloatProperty(      name='Width',
                                 description='Width of slices',
-                                default=64.0, min=1.0, soft_max=1000.0,
+                                default=72.0, min=1.0, soft_max=1000.0,
                                 update=updateSlicedSurface)
     height = FloatProperty(     name='Height',
                                 description='Height of slices',
-                                default=64.0, min=1.0, soft_max=1000.0,
+                                default=40.0, min=1.0, soft_max=1000.0,
                                 update=updateSlicedSurface)
     depth = FloatProperty(      name='Depth',
                                 description='Depth of slices',
-                                default=64.0, min=1.0, soft_max=1000.0,
+                                default=72.0, min=1.0, soft_max=1000.0,
                                 update=updateSlicedSurface)
     offset = FloatProperty(     name='Offset',
                                 description='Offset of generated surface',
@@ -72,11 +72,11 @@ class SlicedSurfacePropertyGroup(bpy.types.PropertyGroup):
                                 update=updateSlicedSurface)
     canvasWidth = FloatProperty(name='Canvas Width',
                                 description='Width of the Canvas for SVG export in meters',
-                                default=200.0, min=0.01, soft_max=1.0,
+                                default=297.0, min=0.01, soft_max=1.0,
                                 update=updateSlicedSurface)
     canvasHeight= FloatProperty(name='Canvas Height',
                                 description='Height of the Canvas for SVG export in meters',
-                                default=200.0, min=0.01, soft_max=1.0,
+                                default=210.0, min=0.01, soft_max=1.0,
                                 update=updateSlicedSurface)
 
 def geometry(prop):
@@ -109,7 +109,7 @@ def geometry(prop):
         geom = ret['geom']
         del ret
 
-        faceVerts = [ele for ele in geom if isinstance(ele, bmesh.types.BMVert)]
+        faceVerts = [ele for ele in geom if isinstance(ele,bmesh.types.BMVert)]
         bmesh.ops.translate(bm, verts=faceVerts, vec=(sliceDepth, 0.0, 0.0))
 
     bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
