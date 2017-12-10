@@ -1,10 +1,10 @@
 import bpy
-import generators
 from bpy_extras.io_utils import ExportHelper
 import numpy as np
 import random
 from math import ceil
 from mathutils import Vector
+from . import generators
 
 
 def number_as_lines(num, w=2, h=4, offset=0.2):
@@ -149,9 +149,9 @@ class ExportSlicedSurfaces(bpy.types.Operator, ExportHelper):
         return {'FINISHED'}
 
 def register():
-    bpy.utils.register_module(__name__)
+    bpy.utils.register_class(ExportSlicedSurfaces)
     print('exportSlicedSurface.py registered')
 
 def unregister():
-    bpy.utils.unregister_module(__name__)
+    bpy.utils.unregister_class(ExportSlicedSurfaces)
     print('exportSlicedSurface.py unregistered')

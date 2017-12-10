@@ -5,7 +5,7 @@ from bpy.app.handlers import persistent
 from mathutils import Vector
 import random
 import numpy as np
-import generators
+from . import generators
 
 
 def updateSlicedSurface(self, context):
@@ -146,7 +146,6 @@ class SlicedSurface(bpy.types.Operator):
 
 @persistent
 def update_sliced_surfaces(scene):
-    #print("update_sliced_surfaces", scene, scene.frame_current)
     for obj in scene.objects:
         if hasattr(obj,'sliced_surface'):
             if obj.sliced_surface.sliced_surface:
@@ -159,7 +158,9 @@ def menu_func(self, context):
 
 
 def register():
-    bpy.utils.register_module(__name__)
+    bpy.utils.register_class(SlicedSurface)
+    bpy.utils.register_class(SlicedSurfacePropertyGroup)
+
     bpy.types.Object.sliced_surface = bpy.props.PointerProperty(type=SlicedSurfacePropertyGroup)
     bpy.types.INFO_MT_mesh_add.append(menu_func)
     bpy.app.handlers.frame_change_post.append(update_sliced_surfaces)
@@ -169,5 +170,7 @@ def unregister():
     bpy.types.INFO_MT_mesh_add.remove(menu_func)
     del bpy.types.Object.sliced_surface
     bpy.app.handlers.frame_change_post.remove(update_sliced_surfaces)
-    bpy.utils.unregister_module(__name__)
+
+    bpy.utils.unregister_class(SlicedSurface)
+    bpy.utils.unregister_class(SlicedSurfacePropertyGroup)
     print('addSlicedSurface.py unregistered')

@@ -48,9 +48,9 @@ class SlicedSurfacePanel(bpy.types.Panel):
         layout.operator('mesh.export_sliced_surface')
 
 def register():
-    bpy.utils.register_module(__name__)
+    bpy.utils.register_class(SlicedSurfacePanel)
     print('slicedSurfacePanel.py registered')
 
 def unregister():
-    bpy.utils.unregister_module(__name__)
+    bpy.utils.unregister_class(SlicedSurfacePanel)
     print('slicedSurfacePanel.py unregistered')
