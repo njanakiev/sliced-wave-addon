@@ -5,7 +5,11 @@ from bpy.app.handlers import persistent
 from mathutils import Vector
 import random
 import numpy as np
-from . import generators
+
+try:
+    import generators
+except ImportError:
+    from . import generators
 
 
 def updateSlicedSurface(self, context):
@@ -84,7 +88,7 @@ def geometry(prop):
     surface = generators.SlicedWaveSurfaceGenerator(numWaves=prop.numWaves,
                                                     maxFreq=prop.maxFreq)
     bm = bmesh.new()
-    scale = 0.1
+    scale = 1
 
     sliceDepth = scale*min(prop.sliceDepth, prop.depth / (prop.nSlices - 1))
     uOffset = prop.slice / prop.nSlices

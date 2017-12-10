@@ -4,7 +4,11 @@ import numpy as np
 import random
 from math import ceil
 from mathutils import Vector
-from . import generators
+
+try:
+    import generators
+except ImportError:
+    from . import generators
 
 
 def number_as_lines(num, w=2, h=4, offset=0.2):
