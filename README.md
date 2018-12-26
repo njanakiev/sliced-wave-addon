@@ -17,6 +17,8 @@ After selecting the desired settings and dimension, the model can be exported as
 
 ![Laser Cutter Template](images/laser_cutter_template.svg)
 
+# License 
+This project is licensed under the MIT license. See the [LICENSE](LICENSE) for details.
 
 [add-ons tab]: https://docs.blender.org/manual/en/dev/preferences/addons.html
 [user preferences]: https://docs.blender.org/manual/en/dev/preferences/introduction.html#open-user-preferences
